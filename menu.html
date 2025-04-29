@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menú Gummy Monkey</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      body {
+        font-family: 'Poppins', sans-serif;
+      }
+    </style>
+</head>
+<body class="bg-gradient-to-r from-yellow-400 to-orange-500 text-gray-800">
+    <header class="container mx-auto px-4 py-6 text-center">
+        <h1 class="text-3xl font-semibold text-white shadow-lg">Gummy Monkey</h1>
+        <p class="text-lg text-gray-800 mt-2">¡Las gomitas enchiladas más deliciosas!</p>
+    </header>
+
+    <main class="container mx-auto px-4 py-8">
+        <section id="productos" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            </section>
+    </main>
+
+    <footer class="bg-gray-900 text-white text-center py-4 mt-12">
+        <p>© 2024 Gummy Monkey. Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        const productos = [
+            {
+                nombre: "Mangochiladas",
+                descripcion: "Gomitas de mango con un toque de chile y limón.",
+                precio: 2.50,
+                imagen: "https://images.unsplash.com/photo-1586040235989-1dd78e3f0578?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", // Ejemplo de URL de imagen
+                alt: "Mangochiladas"
+            },
+            {
+                nombre: "Piñachiladas",
+                descripcion: "Gomitas de piña cubiertas de chile en polvo.",
+                precio: 2.50,
+                imagen: "https://images.unsplash.com/photo-1599745276725-f4d74d9b1968?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", // Ejemplo de URL de imagen
+                alt: "Piñachiladas"
+            },
+            {
+                nombre: "Sandichiladas",
+                descripcion: "Gomitas de sandía con un mix de chiles dulces.",
+                precio: 2.50,
+                imagen: "https://images.unsplash.com/photo-1589156280159-27697a70f29e?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", // Ejemplo de URL de imagen
+                alt: "Sandichiladas"
+            },
+             {
+                nombre: "Gomix Enchilado",
+                descripcion: "Mix de gomitas enchiladas de diferentes sabores.",
+                precio: 3.00,
+                imagen: "https://plus.unsplash.com/premium_photo-1666349344815-b1a715555799?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8Y2FuZHl8ZW58MHx8MHx8fDA%3D", // Ejemplo
+                alt: "Gomix Enchilado"
+            },
+            {
+                nombre: "Aros de Fuego",
+                descripcion: "Aros de durazno enchilados con un toque extra picante.",
+                precio: 3.00,
+                imagen: "https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?q=80&w=2073&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", // Ejemplo
+                alt: "Aros de Fuego"
+            },
+            {
+                nombre: "Serpientes Picantes",
+                descripcion: "Gomitas de serpiente con una mezcla de chiles y especias.",
+                precio: 3.50,
+                imagen: "https://images.unsplash.com/photo-1682687982046-e5e46906bc6e?q=80&w=2074&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", // Ejemplo
+                alt: "Serpientes Picantes"
+            }
+        ];
+
+        const productosSection = document.getElementById("productos");
+
+        productos.forEach(producto => {
+            const productoDiv = document.createElement("div");
+            productoDiv.classList.add("bg-white", "rounded-lg", "shadow-md", "p-4", "flex", "flex-col", "transition-transform", "hover:scale-105");
+
+            productoDiv.innerHTML = `
+                <img src="${producto.imagen}" alt="${producto.alt}" class="w-full h-48 object-cover rounded-t-lg mb-4">
+                <h2 class="text-xl font-semibold text-gray-900 mb-2">${producto.nombre}</h2>
+                <p class="text-gray-700 flex-grow">${producto.descripcion}</p>
+                <p class="text-lg font-bold text-orange-600 mt-4">\$${producto.precio.toFixed(2)}</p>
+            `;
+
+            productosSection.appendChild(productoDiv);
+        });
+    </script>
+</body>
+</html>
