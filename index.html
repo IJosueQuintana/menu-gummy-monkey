@@ -5,27 +5,47 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Menú Gummy Monkey</title>
 
-  <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
-
-  <!-- Fuente -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-
-  <!-- AOS Animaciones -->
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-
-  <!-- Meta SEO -->
-  <meta name="description" content="Gummy Monkey - Gomitas enchiladas irresistibles con chamoy y sabor único. Ordena ya tu mix favorito.">
-  <meta name="keywords" content="gomitas enchiladas, gummy monkey, chamoy, dulces mexicanos, mix de gomitas">
-  <meta name="author" content="Gummy Monkey">
 
   <style>
     body {
       font-family: 'Poppins', sans-serif;
     }
+
+    .tag {
+      position: absolute;
+      top: -10px;
+      left: -10px;
+      background: linear-gradient(to right, #f87171, #facc15);
+      color: white;
+      padding: 4px 10px;
+      font-size: 0.75rem;
+      border-radius: 9999px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    }
+
+    .drip {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
   </style>
 </head>
-<body class="bg-gradient-to-r from-yellow-400 to-orange-500 text-gray-800">
+<body class="bg-gradient-to-r from-yellow-400 to-orange-500 text-gray-800 relative">
+
+  <!-- Logo flotante -->
+  <div class="fixed top-4 left-4 z-50">
+    <img src="https://i.imgur.com/qjb0k1A.png" alt="Logo Gummy Monkey" class="w-16 h-16 rounded-full shadow-xl ring-4 ring-orange-300 bg-white object-cover">
+  </div>
+
+  <!-- Goteo tipo chamoy SVG -->
+  <div class="w-full overflow-hidden">
+    <svg class="drip" viewBox="0 0 1440 150" xmlns="http://www.w3.org/2000/svg">
+      <path fill="#dc2626" fill-opacity="1" d="M0,64L40,69.3C80,75,160,85,240,96C320,107,400,117,480,117.3C560,117,640,107,720,101.3C800,96,880,96,960,106.7C1040,117,1120,139,1200,138.7C1280,139,1360,117,1400,106.7L1440,96L1440,0L1400,0C1360,0,1280,0,1200,0C1120,0,1040,0,960,0C880,0,800,0,720,0C640,0,560,0,480,0C400,0,320,0,240,0C160,0,80,0,40,0L0,0Z"></path>
+    </svg>
+  </div>
 
   <header class="container mx-auto px-4 py-6 text-center">
     <h1 class="text-4xl font-bold text-white drop-shadow-lg">Gummy Monkey</h1>
@@ -34,7 +54,7 @@
 
   <main class="container mx-auto px-4 py-8">
     <section id="productos" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-      <!-- Productos insertados dinámicamente -->
+      <!-- Productos aquí -->
     </section>
   </main>
 
@@ -51,57 +71,64 @@
     <p>© 2024 Gummy Monkey. Todos los derechos reservados.</p>
   </footer>
 
-  <!-- Scripts -->
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
     AOS.init();
 
     const productos = [
       {
-        nombre: "Mix Mini ($0.50)",
+        nombre: "Mix Mini",
         descripcion: "Incluye: 1 aro, 1 gusano, 1 tortuga, 1 diente, 1 delfín, 1 cable, 1 huevo y nuestra exclusiva salsa a base de chamoy, tajín y secretos mágicos.",
         precio: 0.50,
         imagen: "https://i.imgur.com/WVtK3X4.jpeg",
-        alt: "Mix Mini"
+        alt: "Mix Mini",
+        icono: "🍬"
       },
       {
-        nombre: "Mix Regular ($1.25)",
+        nombre: "Mix Regular",
         descripcion: "Una versión extendida del mix mini con porciones dobles y extra salsa para los verdaderos fans del picante dulce.",
         precio: 1.25,
         imagen: "https://i.imgur.com/0sMgNd2.jpeg",
-        alt: "Mix Regular"
+        alt: "Mix Regular",
+        icono: "🔥"
       },
       {
-        nombre: "Mix Fiesta ($2.00)",
+        nombre: "Mix Fiesta",
         descripcion: "Una fiesta en tu boca: mezcla de gomitas variadas con más salsa, más sabor y más emoción. ¡Perfecto para compartir!",
         precio: 2.00,
         imagen: "https://i.imgur.com/UXH62Df.jpeg",
-        alt: "Mix Fiesta"
+        alt: "Mix Fiesta",
+        icono: "⭐🔥"
       },
       {
-        nombre: "Mix Deluxe ($5.00)",
+        nombre: "Mix Deluxe",
         descripcion: "La joya de la corona. Mix premium con hasta 20 gomitas, salsa extra, polvos picositos, tamarindo y sorpresas secretas del chef Gummy.",
         precio: 5.00,
         imagen: "https://i.imgur.com/xS6kZlz.jpeg",
-        alt: "Mix Deluxe"
+        alt: "Mix Deluxe",
+        icono: "👑🔥"
       }
     ];
 
     const productosSection = document.getElementById("productos");
 
-    productos.forEach((producto) => {
+    productos.forEach((producto, i) => {
       const productoDiv = document.createElement("div");
       productoDiv.classList.add(
-        "bg-white", "rounded-2xl", "shadow-xl", "p-4",
-        "hover:scale-105", "hover:shadow-2xl", "transition-transform",
-        "cursor-pointer", "flex", "flex-col", "items-center",
+        "relative", "bg-white", "rounded-3xl", "shadow-2xl", "p-4",
+        "hover:scale-105", "transition-transform", "cursor-pointer", "flex", "flex-col", "items-center",
         "hover:ring-4", "hover:ring-orange-300", "hover:brightness-110"
       );
       productoDiv.setAttribute("data-aos", "zoom-in");
 
+      const etiqueta = i === 0 || i === productos.length - 1 ? `<div class="tag">¡Nuevo!</div>` : "";
+
       productoDiv.innerHTML = `
-        <img src="${producto.imagen}" alt="${producto.alt}" class="w-full h-40 object-cover rounded-lg mb-3">
-        <h2 class="text-xl font-bold text-gray-900 mb-1 text-center">${producto.nombre}</h2>
+        ${etiqueta}
+        <img src="${producto.imagen}" alt="${producto.alt}" class="w-full h-40 object-cover rounded-xl mb-3 shadow-md">
+        <h2 class="text-xl font-bold text-gray-900 text-center mb-1">
+          ${producto.nombre} <span>${producto.icono}</span>
+        </h2>
         <p class="text-lg font-bold text-orange-600">\$${producto.precio.toFixed(2)}</p>
         <button class="mt-3 px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition">Ver más</button>
       `;
