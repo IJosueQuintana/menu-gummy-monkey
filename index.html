@@ -4,11 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Menú Gummy Monkey</title>
-
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-
   <style>
     body {
       font-family: 'Poppins', sans-serif;
@@ -26,27 +24,66 @@
       box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
     }
 
-    .drip {
+    /* Loader */
+    #loader {
+      position: fixed;
       width: 100%;
-      height: auto;
-      display: block;
+      height: 100%;
+      background: #fff7ed;
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.5s ease;
+    }
+
+    .loader-text {
+      font-size: 1.5rem;
+      color: #ea580c;
+      margin-top: 1rem;
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0% { opacity: 1; }
+      50% { opacity: 0.4; }
+      100% { opacity: 1; }
+    }
+
+    /* Goteo animado */
+    .drip path {
+      animation: dripAnim 4s infinite ease-in-out;
+    }
+
+    @keyframes dripAnim {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(5px); }
+      100% { transform: translateY(0); }
     }
   </style>
 </head>
 <body class="bg-gradient-to-r from-yellow-400 to-orange-500 text-gray-800 relative">
+
+  <!-- Pantalla de carga -->
+  <div id="loader">
+    <img src="https://i.imgur.com/qjb0k1A.png" alt="Logo Gummy Monkey" class="w-20 h-20 mb-4 animate-bounce">
+    <p class="loader-text">Cargando dulzura...</p>
+  </div>
 
   <!-- Logo flotante -->
   <div class="fixed top-4 left-4 z-50">
     <img src="https://i.imgur.com/qjb0k1A.png" alt="Logo Gummy Monkey" class="w-16 h-16 rounded-full shadow-xl ring-4 ring-orange-300 bg-white object-cover">
   </div>
 
-  <!-- Goteo tipo chamoy SVG -->
+  <!-- Goteo SVG -->
   <div class="w-full overflow-hidden">
     <svg class="drip" viewBox="0 0 1440 150" xmlns="http://www.w3.org/2000/svg">
-      <path fill="#dc2626" fill-opacity="1" d="M0,64L40,69.3C80,75,160,85,240,96C320,107,400,117,480,117.3C560,117,640,107,720,101.3C800,96,880,96,960,106.7C1040,117,1120,139,1200,138.7C1280,139,1360,117,1400,106.7L1440,96L1440,0L1400,0C1360,0,1280,0,1200,0C1120,0,1040,0,960,0C880,0,800,0,720,0C640,0,560,0,480,0C400,0,320,0,240,0C160,0,80,0,40,0L0,0Z"></path>
+      <path fill="#dc2626" d="M0,64L40,69.3C80,75,160,85,240,96C320,107,400,117,480,117.3C560,117,640,107,720,101.3C800,96,880,96,960,106.7C1040,117,1120,139,1200,138.7C1280,139,1360,117,1400,106.7L1440,96L1440,0L0,0Z"/>
     </svg>
   </div>
 
+  <!-- Encabezado -->
   <header class="container mx-auto px-4 py-6 text-center">
     <h1 class="text-4xl font-bold text-white drop-shadow-lg">Gummy Monkey</h1>
     <p class="text-lg text-white mt-2">¡Las gomitas enchiladas más creativas y sabrosas!</p>
@@ -54,7 +91,7 @@
 
   <main class="container mx-auto px-4 py-8">
     <section id="productos" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-      <!-- Productos aquí -->
+      <!-- Se insertan dinámicamente -->
     </section>
   </main>
 
@@ -73,8 +110,7 @@
 
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
-    AOS.init();
-
+    // Mostrar productos
     const productos = [
       {
         nombre: "Mix Mini",
@@ -119,10 +155,8 @@
         "hover:scale-105", "transition-transform", "cursor-pointer", "flex", "flex-col", "items-center",
         "hover:ring-4", "hover:ring-orange-300", "hover:brightness-110"
       );
-      productoDiv.setAttribute("data-aos", "zoom-in");
-
+      productoDiv.setAttribute("data-aos", "fade-up");
       const etiqueta = i === 0 || i === productos.length - 1 ? `<div class="tag">¡Nuevo!</div>` : "";
-
       productoDiv.innerHTML = `
         ${etiqueta}
         <img src="${producto.imagen}" alt="${producto.alt}" class="w-full h-40 object-cover rounded-xl mb-3 shadow-md">
@@ -132,7 +166,6 @@
         <p class="text-lg font-bold text-orange-600">\$${producto.precio.toFixed(2)}</p>
         <button class="mt-3 px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition">Ver más</button>
       `;
-
       productoDiv.addEventListener("click", () => abrirModal(producto));
       productosSection.appendChild(productoDiv);
     });
@@ -146,6 +179,15 @@
     function cerrarModal() {
       document.getElementById("modal").classList.add("hidden");
     }
+
+    // Loader
+    window.addEventListener("load", () => {
+      const loader = document.getElementById("loader");
+      loader.style.opacity = "0";
+      setTimeout(() => loader.style.display = "none", 500);
+    });
+
+    AOS.init();
   </script>
 </body>
 </html>
